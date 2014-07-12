@@ -55,7 +55,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
             public void onPageSelected(int position) {
                 // on changing the page
                 // make respected tab selected
-                System.out.println("swipey swipe");
                 actionBar.setSelectedNavigationItem(position);
             }
  
@@ -81,9 +80,12 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
         });
     }
 
+	public void setCurrentItem(int item) {
+		viewPager.setCurrentItem(item, true);
+	}
 	
 	public void onMessageSaved(String message) {
-    	Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();     		
+    	Toast.makeText(getApplicationContext(), "Message saved!", Toast.LENGTH_SHORT).show();     		
     	this.message = message;
 	}
 	

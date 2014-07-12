@@ -3,15 +3,21 @@ package com.meghan.messagemax;
 import com.example.messagemax.R;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.Toast;
  
 public class MessageFragment extends Fragment {
@@ -31,21 +37,30 @@ public class MessageFragment extends Fragment {
 
         
         viewPager = (ViewPager) rootView.findViewById(R.id.pager);
- 
-         message_button = (Button) rootView.findViewById(R.id.message_button);      
-         message_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { 
-            	mCallback.onMessageSaved(edit_button.getText().toString());
-            }
-        });                      
-
+           
+         
+         edit_button.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        	 @Override
+        	 public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        		 if (actionId == EditorInfo.IME_ACTION_DONE) {
+        			 mCallback.onMessageSaved(edit_button.getText().toString());
+        		        edit_button.setInputType(0);
+        		        final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        		        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
+        			 ((MainActivity)getActivity()).setCurrentItem(1); //Switch to next fragment (MessageFragment is fragment 0)
+        			 return true;
+        	 }
+        		 return false;
+        	 }
+         });
+			
         return rootView;
     }
     
     public interface onMessageListener {
     	public void onMessageSaved(String message);
     }
+    
     @Override
     public void onAttach(Activity activity) {
     	super.onAttach(activity);
