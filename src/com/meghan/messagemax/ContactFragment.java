@@ -47,7 +47,10 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
 
 
@@ -124,6 +127,13 @@ public class ContactFragment extends ListFragment implements LoaderCallbacks<Cur
                 null);
     }
 
+   @Override
+   public void onListItemClick(ListView l, View v, int position, long id) {
+	   String item = (String) getListAdapter().getItem(position);
+	   String number = numbers.get((int) id);
+	   Toast.makeText(getActivity(), item + " selected at id " + id + " with number " + number, Toast.LENGTH_LONG).show();   
+   }
+   
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         // Once cursor is loaded, give it to adapter
