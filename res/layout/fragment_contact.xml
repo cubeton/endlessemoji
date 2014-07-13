@@ -12,10 +12,5 @@
         android:textSize="40sp"
         android:layout_marginTop="35dp" />
     
-        <FrameLayout
-            android:id="@+id/contact_list"
-            android:name="contact_list"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
         
 </RelativeLayout>

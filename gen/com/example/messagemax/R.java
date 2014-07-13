@@ -31,8 +31,8 @@ public final class R {
          */
         public static final int action_next=0x7f050000;
         public static final int action_previous=0x7f050009;
-        public static final int contact_list=0x7f050003;
         public static final int edit_text=0x7f050004;
+        public static final int name=0x7f050003;
         public static final int np=0x7f050005;
         public static final int pager=0x7f050002;
         public static final int repeat_button=0x7f050006;
@@ -42,11 +42,10 @@ public final class R {
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int contact_list_item=0x7f030001;
-        public static final int contact_list_view=0x7f030002;
-        public static final int fragment_contact=0x7f030003;
-        public static final int fragment_message=0x7f030004;
-        public static final int fragment_repeats=0x7f030005;
-        public static final int fragment_send=0x7f030006;
+        public static final int fragment_contact=0x7f030002;
+        public static final int fragment_message=0x7f030003;
+        public static final int fragment_repeats=0x7f030004;
+        public static final int fragment_send=0x7f030005;
     }
     public static final class menu {
         public static final int activity_screen_slide=0x7f080000;

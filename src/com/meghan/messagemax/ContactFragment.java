@@ -1,5 +1,6 @@
 package com.meghan.messagemax;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import com.example.messagemax.R;
@@ -36,6 +37,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Contacts.People;
+import android.provider.ContactsContract;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -43,6 +47,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.widget.ArrayAdapter;
 
 
 
@@ -60,6 +65,7 @@ public class ContactFragment extends ListFragment implements LoaderCallbacks<Cur
         Cursor c = null; // there is no cursor yet
         int flags = 0; // no auto-requery! Loader requeries.
         mAdapter = new SimpleCursorAdapter(context, layout, c, FROM, TO, flags);
+
     }
 
     @Override
@@ -88,6 +94,24 @@ public class ContactFragment extends ListFragment implements LoaderCallbacks<Cur
         // load from the "Contacts table"
         Uri contentUri = Contacts.CONTENT_URI;
 
+        Cursor phones = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, null);
+        String[] name_values = new String[phones.getCount()];
+        ArrayList<String> names = new ArrayList<String>();
+        ArrayList<String> numbers = new ArrayList<String>();
+        while (phones.moveToNext())
+         {
+           String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+       		names.add(name);
+           System.out.println(name);
+           String number = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+           numbers.add(number);
+           System.out.println(number);
+        }
+        phones.close();
+        
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.contact_list_item, R.id.name, names);
+        setListAdapter(adapter);
+
         // no sub-selection, no sort order, simply every row
         // projection says we want just the _id and the name column
         return new CursorLoader(getActivity(),
@@ -109,35 +133,4 @@ public class ContactFragment extends ListFragment implements LoaderCallbacks<Cur
         // on reset take any old cursor away
         mAdapter.swapCursor(null);
     }	
-	
-/*	//private ContactAdapter mAdapter;
-	private List contactItemList = new  LinkedList<ContactItem>();
-	private LayoutInflater mInflater;
-	private FragmentActivity myContext;
-	public boolean taskRun = false;
-	long currentID = 0;
-	long currentContactID = 0; 
-	
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-		
-			android.support.v4.app.FragmentManager fragmentManager = myContext.getSupportFragmentManager();
-			android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-
-	        // Create the list fragment and add it as our sole content.
-	        if (fragmentManager.findFragmentById(R.id.contact_list) == null) {
-	        	
-	            ListContactFragment list = new ListContactFragment();
-	            fragmentManager.beginTransaction().add(R.id.contact_list, list).commit();
-	        }
-
-        return inflater.inflate(R.layout.fragment_contact, container, false);     
-	}
-	
-	@Override
-	public void onAttach(Activity activity) {
-		myContext = (FragmentActivity) activity;
-		super.onAttach(activity);
-	}*/
 }
