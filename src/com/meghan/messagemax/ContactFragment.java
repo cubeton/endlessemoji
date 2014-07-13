@@ -54,7 +54,9 @@ import android.widget.ArrayAdapter;
 //public class ContactFragment extends Fragment { 
 public class ContactFragment extends ListFragment implements LoaderCallbacks<Cursor> {	
     private CursorAdapter mAdapter;
-
+    ArrayList<String> names;
+    ArrayList<String> numbers;
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,8 +98,8 @@ public class ContactFragment extends ListFragment implements LoaderCallbacks<Cur
 
         Cursor phones = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, null);
         String[] name_values = new String[phones.getCount()];
-        ArrayList<String> names = new ArrayList<String>();
-        ArrayList<String> numbers = new ArrayList<String>();
+        names = new ArrayList<String>();
+        numbers = new ArrayList<String>();
         while (phones.moveToNext())
          {
            String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
