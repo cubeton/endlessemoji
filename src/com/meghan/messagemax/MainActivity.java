@@ -9,18 +9,24 @@ import android.view.MenuItem;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
+import android.telephony.SmsManager;
 import android.view.Menu;
 import android.widget.NumberPicker;
 import android.widget.Toast;
  
 
-public class MainActivity extends FragmentActivity implements ActionBar.TabListener, MessageFragment.onMessageListener, RepeatsFragment.onRepeatListener, ContactFragment.onNumberListener {
+public class MainActivity extends FragmentActivity implements ActionBar.TabListener, 
+																	MessageFragment.onMessageListener,
+																	RepeatsFragment.onRepeatListener,
+																	ContactFragment.onNumberListener,
+																	SendFragment.onSendListener {
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
@@ -98,7 +104,22 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		Toast.makeText(getApplicationContext(), "Number saved!", Toast.LENGTH_SHORT).show();     
     	this.number = number;
 	}
-	
+
+	public void onSendSaved() {
+		Toast.makeText(getApplicationContext(), "This is a test of my new app. Do not be alarmed!!", Toast.LENGTH_SHORT).show();     
+		try {
+			SmsManager.getDefault().sendTextMessage("+15712058980", null, "This is a test of my new app. Do not be alarmed!!", null, null);
+			} catch (Exception e) {
+			AlertDialog.Builder alertDialogBuilder = new
+
+			AlertDialog.Builder(this);
+
+			AlertDialog dialog = alertDialogBuilder.create();
+
+			dialog.setMessage(e.getMessage());
+			dialog.show();
+		}
+	}
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
