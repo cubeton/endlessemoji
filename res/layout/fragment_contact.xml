@@ -9,7 +9,13 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/contact_string"
-        android:textSize="40dp"
-        android:layout_marginTop="35dp"
-        />
+        android:textSize="40sp"
+        android:layout_marginTop="35dp" />
+    
+        <FrameLayout
+            android:id="@+id/contact_list"
+            android:name="contact_list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" />
+        
 </RelativeLayout>

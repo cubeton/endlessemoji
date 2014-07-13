@@ -47,7 +47,7 @@ public class MessageFragment extends Fragment {
         		        edit_button.setInputType(0);
         		        final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         		        imm.hideSoftInputFromWindow(getView().getWindowToken(), 0);
-        			 ((MainActivity)getActivity()).setCurrentItem(1); //Switch to next fragment (MessageFragment is fragment 0)
+        		        ((MainActivity)getActivity()).setCurrentItem(1); //Switch to next fragment (MessageFragment is fragment 0)
         			 return true;
         	 }
         		 return false;

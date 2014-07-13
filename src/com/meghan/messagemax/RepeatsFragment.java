@@ -35,6 +35,7 @@ public class RepeatsFragment extends Fragment {
             @Override
             public void onClick(View v) { 	
             	mCallback.onRepeatSaved(np.getValue());
+            	((MainActivity)getActivity()).setCurrentItem(2); //Switch to next fragment (RepeatFragment is fragment 1)
             }
         });   
         

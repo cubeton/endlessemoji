@@ -4,160 +4,140 @@ import java.util.LinkedList;
 import java.util.List;
 import com.example.messagemax.R;
 
+/*
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.ListFragment;
+import android.app.LoaderManager;
+import android.content.CursorLoader;
+import android.content.Loader;
+import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract.Contacts;
+import android.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.CursorAdapter;
+import android.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.provider.ContactsContract;
-import android.provider.ContactsContract.Contacts;
-import android.support.v4.app.Fragment;
-import android.app.FragmentTransaction;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.widget.SimpleCursorAdapter;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Filter;
 import android.widget.ListView;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.FragmentTransaction;
-import android.app.ListFragment;
-import android.content.ContentResolver;
+import android.widget.SearchView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.SearchView.OnQueryTextListener;*/
+
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.widget.TextView;
+import android.provider.ContactsContract.Contacts;
+import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.CursorAdapter;
+import android.support.v4.widget.SimpleCursorAdapter;
 
 
-public class ContactFragment extends Fragment { 
-	//private ContactAdapter mAdapter;
+
+//public class ContactFragment extends Fragment { 
+public class ContactFragment extends ListFragment implements LoaderCallbacks<Cursor> {	
+    private CursorAdapter mAdapter;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        // create adapter once
+        Context context = getActivity();
+        int layout = android.R.layout.simple_list_item_1;
+        Cursor c = null; // there is no cursor yet
+        int flags = 0; // no auto-requery! Loader requeries.
+        mAdapter = new SimpleCursorAdapter(context, layout, c, FROM, TO, flags);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        // each time we are started use our listadapter
+        setListAdapter(mAdapter);
+        // and tell loader manager to start loading
+        getLoaderManager().initLoader(0, null, this);
+    }
+
+    // columns requested from the database
+    private static final String[] PROJECTION = {
+        Contacts._ID, // _ID is always required
+        Contacts.DISPLAY_NAME_PRIMARY // that's what we want to display
+    };
+
+    // and name should be displayed in the text1 textview in item layout
+    private static final String[] FROM = { Contacts.DISPLAY_NAME_PRIMARY };
+    private static final int[] TO = { android.R.id.text1 };
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+
+        // load from the "Contacts table"
+        Uri contentUri = Contacts.CONTENT_URI;
+
+        // no sub-selection, no sort order, simply every row
+        // projection says we want just the _id and the name column
+        return new CursorLoader(getActivity(),
+                contentUri,
+                PROJECTION,
+                null,
+                null,
+                null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        // Once cursor is loaded, give it to adapter
+        mAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        // on reset take any old cursor away
+        mAdapter.swapCursor(null);
+    }	
+	
+/*	//private ContactAdapter mAdapter;
 	private List contactItemList = new  LinkedList<ContactItem>();
 	private LayoutInflater mInflater;
+	private FragmentActivity myContext;
 	public boolean taskRun = false;
 	long currentID = 0;
 	long currentContactID = 0; 
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+		
+			android.support.v4.app.FragmentManager fragmentManager = myContext.getSupportFragmentManager();
+			android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+
+	        // Create the list fragment and add it as our sole content.
+	        if (fragmentManager.findFragmentById(R.id.contact_list) == null) {
+	        	
+	            ListContactFragment list = new ListContactFragment();
+	            fragmentManager.beginTransaction().add(R.id.contact_list, list).commit();
+	        }
 
         return inflater.inflate(R.layout.fragment_contact, container, false);     
 	}
-/*	
+	
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		mInflater = (LayoutInflater) getActivity().getSystemService(Activity.LAYOUT_INFLATER_SERVICE);	
-		if(!taskRun){
-			FragmentTransaction ft =  getFragmentManager().beginTransaction();
-			ListContactTask task= new ListContactTask(getActivity(),ft);
-			task.execute();	
-		}
-		taskRun = true;
-		mAdapter = new ContactAdapter(getActivity(), R.layout.list_item, R.id.key, contactItemList);
-		mAdapter .setInflater(mInflater);
-		mAdapter.setLayout(R.layout.list_item);
-		setListAdapter(mAdapter);
-		ListView listView = getListView();
-		getListView().invalidate();
+	public void onAttach(Activity activity) {
+		myContext = (FragmentActivity) activity;
+		super.onAttach(activity);
 	}*/
-
-
 }
-
-/*class ContactAdapter extends ArrayAdapter<ContactItem> {
-
-	   private static String TAG = ContactAdapter.class.getName();
-	   private LayoutInflater inflator = null;
-	   List<ContactItem> pairList = null;
-	   private int layout;
-	   
-	   public ContactAdapter(Context context, int resource, int textViewResourceId, List<ContactItem> objects) {
-			super(context, resource, textViewResourceId, objects);
-			this.pairList = objects;
-		}
-
-		public void setInflater(LayoutInflater mInflater) {
-			this.inflator = mInflater;
-		}
-		
-		public void setLayout(int layout){
-			this.layout = layout;
-		}
-
-		*//**
-		 * Make a view to hold each row.
-		 * 
-		 * @see android.widget.ListAdapter#getView(int, android.view.View,
-		 *      android.view.ViewGroup)
-		 *//*
-		public View getView(final int position, View convertView,
-				ViewGroup parent) {
-			ViewHolder holder;
-			try {
-				if (convertView == null) {
-					convertView = this.inflator.inflate(
-							layout, null);
-					holder = new ViewHolder();
-					holder.key = (TextView) convertView
-							.findViewById(R.id.key);
-					holder.value = (TextView) convertView.findViewById(R.id.value);
-					convertView.setTag(holder);
-				} else {
-					 holder = (ViewHolder) convertView.getTag();
-				}
-				ContactItem pair = (ContactItem) getItem(position);
-				String key = pair.mDisplayName;
-				String value = pair.mPhone;
-
-				holder.key.setText(key);
-				holder.value.setText(value);
-				
-			} catch (Exception e) {
-				Log.e(TAG, e.toString(), e);
-			}
-			return convertView;
-		}
-
-		static class ViewHolder {
-			TextView key;
-			TextView value;
-		}
-
-		public Filter getFilter() {
-			return null;
-		}
-
-		public long getItemId(int position) {
-			return 1;
-		}
-
-		public int getCount() {
-			return pairList.size();
-		}
-
-		public ContactItem getItem(int position) {
-			return (ContactItem) super.getItem(position);
-		}
-
-		@Override
-		public int getItemViewType(int position) {
-			return super.getItemViewType(position);
-		}
-
-		@Override
-		public int getViewTypeCount() {
-			return super.getViewTypeCount();
-		}
-
-		@Override
-		public boolean isEmpty() {
-			return super.isEmpty();
-		}
-	}
-
-*/

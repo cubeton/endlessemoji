@@ -34,7 +34,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-        System.out.println("starting...");
 		//Initialization
 		viewPager = (ViewPager) findViewById(R.id.pager);
 		actionBar = getActionBar();
@@ -90,7 +89,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	}
 	
 	public void onRepeatSaved(int repeat) {
-    	Toast.makeText(getApplicationContext(), String.valueOf(repeat), Toast.LENGTH_LONG).show();     		
+		Toast.makeText(getApplicationContext(), "Repeats saved!", Toast.LENGTH_SHORT).show();     
     	this.repeat = repeat;
 	}
 	
