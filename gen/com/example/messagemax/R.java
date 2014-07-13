@@ -30,8 +30,14 @@ public final class R {
     
          */
         public static final int action_next=0x7f050000;
-        public static final int action_previous=0x7f050009;
+        public static final int action_previous=0x7f05000f;
         public static final int edit_text=0x7f050004;
+        public static final int message_repeat=0x7f050009;
+        public static final int message_repeat_id=0x7f05000b;
+        public static final int message_to=0x7f05000a;
+        public static final int message_to_id=0x7f05000e;
+        public static final int message_what=0x7f05000c;
+        public static final int message_what_id=0x7f05000d;
         public static final int name=0x7f050003;
         public static final int np=0x7f050005;
         public static final int pager=0x7f050002;

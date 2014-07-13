@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import com.example.messagemax.R;
+import com.meghan.messagemax.RepeatsFragment.onRepeatListener;
 
 /*
 import android.app.Activity;
@@ -33,6 +34,7 @@ import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.SearchView.OnQueryTextListener;*/
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
@@ -57,6 +59,7 @@ import android.widget.Toast;
 //public class ContactFragment extends Fragment { 
 public class ContactFragment extends ListFragment implements LoaderCallbacks<Cursor> {	
     private CursorAdapter mAdapter;
+    onNumberListener mCallback;
     ArrayList<String> names;
     ArrayList<String> numbers;
     
@@ -131,7 +134,9 @@ public class ContactFragment extends ListFragment implements LoaderCallbacks<Cur
    public void onListItemClick(ListView l, View v, int position, long id) {
 	   String item = (String) getListAdapter().getItem(position);
 	   String number = numbers.get((int) id);
-	   Toast.makeText(getActivity(), item + " selected at id " + id + " with number " + number, Toast.LENGTH_LONG).show();   
+	   //Toast.makeText(getActivity(), item + " selected at id " + id + " with number " + number, Toast.LENGTH_LONG).show();   
+	   mCallback.onNumberSaved(numbers.get((int) id));
+   	  ((MainActivity)getActivity()).setCurrentItem(3); //Switch to next fragment (ContactFragment is fragment 2)
    }
    
     @Override
@@ -144,5 +149,19 @@ public class ContactFragment extends ListFragment implements LoaderCallbacks<Cur
     public void onLoaderReset(Loader<Cursor> loader) {
         // on reset take any old cursor away
         mAdapter.swapCursor(null);
-    }	
+    }
+    
+    public interface onNumberListener {
+    	public void onNumberSaved(String number);
+    }
+    
+    @Override
+    public void onAttach(Activity activity) {
+    	super.onAttach(activity);
+    	try {
+    		mCallback = (onNumberListener) activity;    		
+    	} catch(ClassCastException e) {
+    		throw new ClassCastException(activity.toString() + " RAWRmust implement onNumberListener");
+    	}
+    }
 }

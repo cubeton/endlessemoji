@@ -20,12 +20,13 @@ import android.widget.NumberPicker;
 import android.widget.Toast;
  
 
-public class MainActivity extends FragmentActivity implements ActionBar.TabListener, MessageFragment.onMessageListener, RepeatsFragment.onRepeatListener {
+public class MainActivity extends FragmentActivity implements ActionBar.TabListener, MessageFragment.onMessageListener, RepeatsFragment.onRepeatListener, ContactFragment.onNumberListener {
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
 	String message;
 	int repeat = -1;
+	String number;
 	
 	//Tab titles
 	private String[] tabs = {"Message", "Repeats", "Contacts", "Send!"};
@@ -91,6 +92,11 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	public void onRepeatSaved(int repeat) {
 		Toast.makeText(getApplicationContext(), "Repeats saved!", Toast.LENGTH_SHORT).show();     
     	this.repeat = repeat;
+	}
+	
+	public void onNumberSaved(String number) {
+		Toast.makeText(getApplicationContext(), "Number saved!", Toast.LENGTH_SHORT).show();     
+    	this.number = number;
 	}
 	
     @Override

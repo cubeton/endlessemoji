@@ -9,8 +9,8 @@
         android:id="@+id/textView1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
         android:gravity="center"
+        android:layout_marginTop="35dp"
         android:text="@string/send_string"
         android:textSize="40dp" />
 
@@ -18,10 +18,69 @@
         android:id="@+id/send_button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"        
+        android:layout_marginTop="25dp"
         android:text="@string/send_button_string" />
+        
+    <TextView
+        android:id="@+id/message_repeat"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/message_to"
+        android:layout_marginTop="46dp"
+        android:gravity="center"
+        android:text="Repeat time:"
+        android:textSize="20dp" />
+     <TextView
+        android:id="@+id/message_repeat_id"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/message_to"
+        android:layout_marginTop="46dp"
+        android:gravity="center"
+        android:textSize="20dp" />
 
+    <TextView
+        android:id="@+id/message_what"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/message_repeat"
+        android:layout_marginTop="34dp"
+        android:gravity="center"
+        android:text="Message:"
+        android:textSize="20dp" />
+    <TextView
+        android:id="@+id/message_what_id"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/message_repeat"
+        android:layout_marginTop="34dp"
+        android:gravity="center"
+        android:textSize="20dp" />
+
+
+    <TextView
+        android:id="@+id/message_to"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/send_button"
+        android:layout_marginTop="31dp"
+        android:gravity="center"
+        android:text="Sending to:"
+        android:textSize="20dp" />
+    <TextView
+        android:id="@+id/message_to_id"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/send_button"
+        android:layout_marginTop="31dp"
+        android:gravity="center"
+        android:textSize="20dp" />
 </RelativeLayout>
