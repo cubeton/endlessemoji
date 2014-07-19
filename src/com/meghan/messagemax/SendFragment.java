@@ -18,7 +18,6 @@ public class SendFragment extends Fragment {
 	
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-    	System.out.println("adding button");
         
         rootView = inflater.inflate(R.layout.fragment_send, container, false);
         Button send_button = (Button) rootView.findViewById(R.id.send_button);
@@ -28,7 +27,6 @@ public class SendFragment extends Fragment {
             	mCallback.onSendSaved();
             }
         });   
-        System.out.println("adding button");
         
         return rootView;
     }

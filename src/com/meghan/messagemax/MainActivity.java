@@ -1,5 +1,7 @@
 package com.meghan.messagemax;
 
+import java.util.ArrayList;
+
 import com.example.messagemax.R;
 import com.meghan.messagemax.MessageFragment.onMessageListener;
 import com.meghan.tabsswipe.adapter.TabsPagerAdapter;
@@ -30,6 +32,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	private ViewPager viewPager;
 	private TabsPagerAdapter mAdapter;
 	private ActionBar actionBar;
+	
 	String message;
 	int repeat = -1;
 	String number;
@@ -106,18 +109,46 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 	}
 
 	public void onSendSaved() {
-		Toast.makeText(getApplicationContext(), "This is a test of my new app. Do not be alarmed!!", Toast.LENGTH_SHORT).show();     
+		if(message == null || message.isEmpty()) {
+			Toast.makeText(getApplicationContext(), "Please enter message to send", Toast.LENGTH_SHORT).show();     
+			return;
+		}
+		
+		if(repeat == -1) {
+			Toast.makeText(getApplicationContext(), "Please select a repeat number", Toast.LENGTH_SHORT).show();     
+			return;
+		}
+		
+		if(number == null || number.isEmpty()) {
+			Toast.makeText(getApplicationContext(), "Please select a recipient", Toast.LENGTH_SHORT).show();     
+			return;
+		}
+		message = "meow";
+		number = "+17039691286";
+		repeat = 5;
+		
 		try {
-			SmsManager.getDefault().sendTextMessage("+15712058980", null, "This is a test of my new app. Do not be alarmed!!", null, null);
-			} catch (Exception e) {
-			AlertDialog.Builder alertDialogBuilder = new
+			StringBuilder sb = new StringBuilder();
+			for(int i = 0; i<repeat; i++) {
+				sb.append(message);
+				
+			}
+			System.out.println(message);
+			System.out.println(sb.toString());
+			SmsManager sms = SmsManager.getDefault();
+			ArrayList<String> msgArray = sms.divideMessage(sb.toString());
+			sms.sendMultipartTextMessage(number, null, msgArray, null, null);
+			Toast.makeText(getApplicationContext(), "Message sent!", Toast.LENGTH_SHORT).show();  
+			
+			setCurrentItem(0); //Switch to original fragment, restarting
+			
+			//Resetting values to try again
+			number = null;
+			repeat = -1;
+			message = null;
 
-			AlertDialog.Builder(this);
-
-			AlertDialog dialog = alertDialogBuilder.create();
-
-			dialog.setMessage(e.getMessage());
-			dialog.show();
+		} catch (Exception e) {
+			Toast.makeText(getApplicationContext(), "Error sending, please try again", Toast.LENGTH_LONG).show();  
 		}
 	}
     @Override

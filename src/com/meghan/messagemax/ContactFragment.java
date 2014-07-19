@@ -63,17 +63,17 @@ public class ContactFragment extends ListFragment implements LoaderCallbacks<Cur
     ArrayList<String> names;
     ArrayList<String> numbers;
     
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        System.out.println("adding contacts");
         // create adapter once
         Context context = getActivity();
         int layout = android.R.layout.simple_list_item_1;
         Cursor c = null; // there is no cursor yet
         int flags = 0; // no auto-requery! Loader requeries.
         mAdapter = new SimpleCursorAdapter(context, layout, c, FROM, TO, flags);
-
     }
 
     @Override
@@ -98,7 +98,7 @@ public class ContactFragment extends ListFragment implements LoaderCallbacks<Cur
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-
+        System.out.println("adding contacts right now");
         // load from the "Contacts table"
         Uri contentUri = Contacts.CONTENT_URI;
 
@@ -132,10 +132,10 @@ public class ContactFragment extends ListFragment implements LoaderCallbacks<Cur
 
    @Override
    public void onListItemClick(ListView l, View v, int position, long id) {
-	   String item = (String) getListAdapter().getItem(position);
-	   String number = numbers.get((int) id);
-	   //Toast.makeText(getActivity(), item + " selected at id " + id + " with number " + number, Toast.LENGTH_LONG).show();   
+	   System.out.println(position);
+	   System.out.println(getListAdapter().getItem(position));  
 	   mCallback.onNumberSaved(numbers.get((int) id));
+	   
    	  ((MainActivity)getActivity()).setCurrentItem(3); //Switch to next fragment (ContactFragment is fragment 2)
    }
    
