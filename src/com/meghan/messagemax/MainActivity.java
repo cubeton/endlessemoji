@@ -123,9 +123,7 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			Toast.makeText(getApplicationContext(), "Please select a recipient", Toast.LENGTH_SHORT).show();     
 			return;
 		}
-		message = "meow";
 		number = "+17039691286";
-		repeat = 5;
 		
 		try {
 			StringBuilder sb = new StringBuilder();
