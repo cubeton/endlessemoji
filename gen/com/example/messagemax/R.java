@@ -18,6 +18,7 @@ public final class R {
     }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
+        public static final int sendbutton=0x7f020001;
     }
     public static final class id {
         public static final int action_flip=0x7f050001;
@@ -51,16 +52,15 @@ public final class R {
         public static final int activity_screen_slide=0x7f080000;
     }
     public static final class string {
-        public static final int action_finish=0x7f060009;
-        public static final int action_next=0x7f060007;
-        public static final int action_previous=0x7f060008;
+        public static final int action_finish=0x7f060008;
+        public static final int action_next=0x7f060006;
+        public static final int action_previous=0x7f060007;
         public static final int app_name=0x7f060000;
         public static final int contact_string=0x7f060003;
         public static final int message_string=0x7f060001;
-        public static final int next=0x7f060006;
-        public static final int press_me=0x7f06000a;
+        public static final int next=0x7f060005;
+        public static final int press_me=0x7f060009;
         public static final int repeat_string=0x7f060002;
-        public static final int send_button_string=0x7f060005;
         public static final int send_string=0x7f060004;
     }
     public static final class style {

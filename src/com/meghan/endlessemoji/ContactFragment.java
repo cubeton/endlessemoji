@@ -68,10 +68,8 @@ public class ContactFragment extends ListFragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        System.out.println("adding contacts");
     }
-
-    // and name should be displayed in the text1 textview in item layout
+    
     private static final String[] FROM = { Contacts.DISPLAY_NAME_PRIMARY };
     private static final int[] TO = { android.R.id.text1 };
 

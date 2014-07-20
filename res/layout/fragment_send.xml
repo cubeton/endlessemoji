@@ -17,11 +17,16 @@
     <Button
         android:id="@+id/send_button"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_below="@+id/textView1"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="@string/send_button_string" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="150dp"
+        android:width="20dp"
+        android:background="@drawable/sendbutton"
+        android:gravity="center"
+        android:text="@string/press_me" />
         
 </RelativeLayout>

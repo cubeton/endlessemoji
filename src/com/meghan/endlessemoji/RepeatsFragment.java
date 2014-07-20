@@ -21,7 +21,6 @@ public class RepeatsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-    	System.out.println("showing repeats fragment");
     	
         rootView = inflater.inflate(R.layout.fragment_repeats, container, false);
  

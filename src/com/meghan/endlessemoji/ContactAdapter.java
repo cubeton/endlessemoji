@@ -20,9 +20,11 @@ public class ContactAdapter extends ArrayAdapter<String>{
 	@Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = (TextView) super.getView(position, convertView, parent);
-        if(position%2==0)
+        if(position % 2 == 0)
         {
-            view.setBackgroundColor(Color.parseColor("#FFD700"));
+            view.setBackgroundColor(Color.parseColor("#b3e5fc"));
+        } else {
+        	view.setBackgroundColor(Color.parseColor("#b2ebf2"));
         }
         return view;
     }

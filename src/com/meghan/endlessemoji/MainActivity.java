@@ -123,7 +123,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 			Toast.makeText(getApplicationContext(), "Please select a recipient", Toast.LENGTH_SHORT).show();     
 			return;
 		}
-		number = "+17039691286";
 		
 		try {
 			StringBuilder sb = new StringBuilder();
