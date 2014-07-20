@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Message Max</string>
+    <string name="app_name">Endless Emoji</string>
     <string name="message_string">What\'ll you say?</string>
     <string name="repeat_string">How many repeats?</string>
     <string name="contact_string">Who to contact?</string>
