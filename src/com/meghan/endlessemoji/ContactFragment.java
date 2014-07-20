@@ -1,10 +1,11 @@
-package com.meghan.messagemax;
+package com.meghan.endlessemoji;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import com.example.messagemax.R;
-import com.meghan.messagemax.RepeatsFragment.onRepeatListener;
+import com.meghan.endlessemoji.RepeatsFragment.onRepeatListener;
+
 import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
@@ -49,22 +50,19 @@ public class ContactFragment extends ListFragment{
         Uri contentUri = Contacts.CONTENT_URI;
 
        Cursor phones = getActivity().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,null,null, null);
-        String[] name_values = new String[phones.getCount()];
-        names = new ArrayList<String>();
-        numbers = new ArrayList<String>();
-        while (phones.moveToNext())
-         {
-           String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-       		names.add(name);
-           System.out.println(name);
-           String number = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-           numbers.add(number);
-           System.out.println(number);
+       String[] name_values = new String[phones.getCount()];
+       names = new ArrayList<String>();
+       numbers = new ArrayList<String>();
+        
+       while (phones.moveToNext())
+       	{
+       	   names.add(phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)));
+           numbers.add(phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)));
         }
         phones.close();
         
-       ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.contact_list_item, R.id.name, names);
-        setListAdapter(adapter);
+       
+       setListAdapter(new ContactAdapter(getActivity(), names));
     }
 
     @Override
@@ -79,10 +77,7 @@ public class ContactFragment extends ListFragment{
 
    @Override
    public void onListItemClick(ListView l, View v, int position, long id) {
-	   System.out.println(position);
-	   System.out.println(getListAdapter().getItem(position));  
-	   mCallback.onNumberSaved(numbers.get((int) id));
-	   
+	   mCallback.onNumberSaved(numbers.get((int) id));	   
    	  ((MainActivity)getActivity()).setCurrentItem(3); //Switch to next fragment (ContactFragment is fragment 2)
    }
    

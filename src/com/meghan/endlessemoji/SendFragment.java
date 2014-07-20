@@ -1,7 +1,7 @@
-package com.meghan.messagemax;
+package com.meghan.endlessemoji;
 
 import com.example.messagemax.R;
-import com.meghan.messagemax.RepeatsFragment.onRepeatListener;
+import com.meghan.endlessemoji.RepeatsFragment.onRepeatListener;
 
 import android.app.Activity;
 import android.os.Bundle;

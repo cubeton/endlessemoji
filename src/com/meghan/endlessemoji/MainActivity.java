@@ -1,9 +1,9 @@
-package com.meghan.messagemax;
+package com.meghan.endlessemoji;
 
 import java.util.ArrayList;
 
 import com.example.messagemax.R;
-import com.meghan.messagemax.MessageFragment.onMessageListener;
+import com.meghan.endlessemoji.MessageFragment.onMessageListener;
 import com.meghan.tabsswipe.adapter.TabsPagerAdapter;
 
 import android.app.Activity;
@@ -131,8 +131,6 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 				sb.append(message);
 				
 			}
-			System.out.println(message);
-			System.out.println(sb.toString());
 			SmsManager sms = SmsManager.getDefault();
 			ArrayList<String> msgArray = sms.divideMessage(sb.toString());
 			sms.sendMultipartTextMessage(number, null, msgArray, null, null);

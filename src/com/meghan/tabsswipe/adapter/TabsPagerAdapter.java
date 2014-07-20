@@ -1,9 +1,9 @@
 package com.meghan.tabsswipe.adapter;
 
-import com.meghan.messagemax.ContactFragment;
-import com.meghan.messagemax.MessageFragment;
-import com.meghan.messagemax.RepeatsFragment;
-import com.meghan.messagemax.SendFragment;
+import com.meghan.endlessemoji.ContactFragment;
+import com.meghan.endlessemoji.MessageFragment;
+import com.meghan.endlessemoji.RepeatsFragment;
+import com.meghan.endlessemoji.SendFragment;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

@@ -1,4 +1,4 @@
-package com.meghan.messagemax;
+package com.meghan.endlessemoji;
 
 import com.example.messagemax.R;
 
